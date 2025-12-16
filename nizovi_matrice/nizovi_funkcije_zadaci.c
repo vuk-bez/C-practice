@@ -3,6 +3,8 @@
 #include <time.h> // dodato zbog zadataka za random generator brojeva
 #include <math.h> // dodato zbog korijena
 
+
+// ZADACI IZ FAJLA Java_2013_Nizovi.pdf pocev od 11.
 void ucitajNiz(int n, int niz[]) {
     for(int i=0; i < n; i++) {
         scanf("%d", &niz[i]);
@@ -19,6 +21,7 @@ void stampajNiz(int n, int niz[]) {
         printf("%d", niz[i]);
     }
 }
+
 /*
 Napisati metod void uslov(int[] x) koji štampa sve elemente niza x koji su po 
 apsolutnoj vrijednosti prosti brojevi ili su oblika ±2k, za neki prirodan broj k.
@@ -421,13 +424,11 @@ NIJE URADJEN
 */
 
 double hornerValue(int n, double a[], double x) {
-    double zbir = 0;
-    for(int i = n-1; i > 0; i--) {
-        double cinilac = a[i]*x + a[i-1];
-        zbir += cinilac*x + a[i-2];
-        
+    double cinilac = a[n-1]*x + a[n-2];
+    for(int i = n-3; i >= 0; i--) {
+        cinilac = x*cinilac + a[i];
     }
-    return zbir;
+    return cinilac;
 }
 /*
 Napisati metod double[] addPoly(double[] a, double[] b) koji izračunava i 
@@ -447,6 +448,24 @@ double derivPoly(int n, double a[]){
     for(int i = 0; i < n; i++) {
         printf("%.1lf ", a[i]*i);
     }
+}
+/*
+Napisati metod double[] multPoly(double[] a, double[] b) koji izračunava i 
+vraća koeficijente polinoma P(t) * Q(t)
+*/
+void multPoly(int n, double a[], double b[]) {
+    int duzina = 2*n - 1;
+    double c[duzina];
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++){
+            double cinilac = a[i]*b[j];
+            c[i+j] += cinilac;
+        }
+    }
+    for(int i = 0; i < duzina; i++){
+        printf("%lf ", c[i]);
+    }
+
 }
 int main() {
     
@@ -483,9 +502,11 @@ int main() {
     //printf("%d ", krugovi(n, x, y, 0, 0, 10));
     //printf("%d", najveciPravougaonik(n, a, b, c, d));
     //krugoviDva(n, x, y);
-    //printf("%lf", valueofPoly(n, x, 3));
+    printf("%lf", valueofPoly(n, x, 3));
+    printf("%lf", hornerValue(n, x, 3));
     //addPoly(n, x, y);
-    derivPoly(n, x);
+    //derivPoly(n, x);
+    //multPoly(n, x, y);
 
     
     return 0;
