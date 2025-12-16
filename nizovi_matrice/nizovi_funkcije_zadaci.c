@@ -420,7 +420,6 @@ double valueofPoly(int n, double a[], double x) {
 Napisati metod double hornerValue(double[] a, double x) koji primjenom 
 Hornerove šeme izračunava vrijednost polinoma P u tački x, ako je P zadat nizom koefecijanata 
 a. Napomena: opis Hornerove šeme: http://math.fullerton.edu/mathews/n2003/HornerMod.html 
-NIJE URADJEN
 */
 
 double hornerValue(int n, double a[], double x) {
