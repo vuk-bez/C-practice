@@ -13,7 +13,7 @@ void ucitajMatricu(int n, int m, int matr[n][m]) {
 void stampajMatricu(int n, int m, int matr[n][m]) {
     for(int i=0; i < n; i++) {
         for(int j=0; j < m; j++) {
-            printf("%2d ", matr[i][j]);
+            printf("%3d ", matr[i][j]);
         }
         printf("\n");
     }
@@ -218,19 +218,41 @@ kazaljke sata. Ulaz: Unosi se prirodan broj N. Izlaz: Štampati traženu matricu
 simbola.  NE RADII --- pogledati ponovo
 */
 
-/*void Sablon3(int n, int matr[2*n+1][2*n+1]){
-    int br = 0;
-    int i = n, j = n;
-    for(int c = 0; c < (2*n+1); c++) {
-        for(int c1 = 0; c1 <= c; c1++){
-            matr[i][j] = br++;
+void Sablon3(int n) {
+    int dimenzije = 2*n + 1;
+    int a[dimenzije][dimenzije];
+
+    for (int i = 0; i < dimenzije; i++)
+        for (int j = 0; j < dimenzije; j++)
+            a[i][j] = 0;
+
+    int x = n, y = n;   // centar
+    int broj = 0;
+    a[x][y] = broj++;
+
+    // smjerovi: gore, lijevo, dolje, desno
+    int dx[] = {-1, 0, 1, 0}; // ako idemo gore, vrsta ce biti za jedan manja, a kolona ostaje ista, itd.
+    int dy[] = {0, -1, 0, 1};
+
+    int korak = 1;
+    int smjer = 0;
+
+    while (broj < dimenzije * dimenzije) {
+        for (int pon = 0; pon < 2; pon++) {
+            for (int i = 0; i < korak; i++) {
+                x += dx[smjer];
+                y += dy[smjer];
+
+                if (x >= 0 && x < dimenzije && y >= 0 && y < dimenzije)
+                    a[x][y] = broj++;
+            }
+            smjer = (smjer + 1) % 4;
         }
-        for(int c2 = 0; c2 <= c; c2++ j = (c % 2 == 0 ? -1:1) * (j + 1)){
-            matr[i][j] = br++;
-        }
-        
+        korak++;
     }
-}*/
+
+    stampajMatricu(dimenzije, dimenzije, a);
+}
 
 /*
 Odrediti zbir i proizvod dvije kvadratne matrice.
@@ -246,32 +268,39 @@ void zbirMatrica(int n, int m, int a[n][m], int b[n][m]){
 
     stampajMatricu(n, m, c); // stampanje matrice
 }
-/*void mnozenjeMatrica(int n, int m, int a[n][m], int b[n][m]){
-    int c[n][m];
+void mnozenjeMatrica(int n, int m, int p, int a[n][m], int b[m][p]){
+    int c[n][p];
 
     for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
-            c[i][j] = a[i][j] + b[i][j];
+        for(int j = 0; j < p; j++) {
+            c[i][j] = 0;
+            for(int pomjeraj = 0; pomjeraj < m; pomjeraj++){
+                c[i][j] += a[i][pomjeraj]*b[pomjeraj][j];
+            }
         }
     }
 
-    stampajMatricu(n, m, c); // stampanje matrice
-}*/
+    stampajMatricu(n, p, c); // stampanje matrice
+}
 
 int main() {
 
     srand(time(NULL));
-    int n, m;
-    scanf("%d%d", &n, &m);
+    int n, m, p;
+    scanf("%d%d%d", &n, &m, &p);
     int matr[n][m];
-    int a[n][m];
-    int b[n][m];
+    //int a[n][m];
+    //int b[n][m];
     int matrica[2*n+1][2*n+1];
 
+    int a[n][m];
+    int b[m][p];
+
     //ucitajMatricu(n, m, matr);
-    ucitajMatricu(n, m, a);
-    ucitajMatricu(n, m, b);
-    zbirMatrica(n, m, a, b);
+    //ucitajMatricu(n, m, a);
+    //ucitajMatricu(m, p, b);
+    //zbirMatrica(n, m, a, b);
+    //mnozenjeMatrica(n, m, p, a, b);
     //popuniRandom(n, m, matr);
     //stampajMatricu(n, m, matr);
     //printf("\n Zbir elemenata matrice je %d. \n", zbirSvih(n,m,matr));
@@ -292,7 +321,7 @@ int main() {
     //Sablon(n, m, matr);
     //Sablon2(n, m, matr);
     //popuniNulama(n, matr);
-    //Sablon3(n, matr);
+    Sablon3(n);
 
     //stampajMatricu(n, m, matr);
 
