@@ -70,13 +70,12 @@ int main() {
     jedan->next = dva;
 
     dva->info = 30;
-    dva->next = NULL;
+    dva->next = NULL; 
+
+    umetniNakon(jedan, 67);
 
     stampaListe(glava);
     brisanjeListe(glava);
-
-
-
 
     return 0;
 }
