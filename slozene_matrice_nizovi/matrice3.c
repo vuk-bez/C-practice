@@ -75,15 +75,8 @@ void zad2(int n, int matrix[n*n][n*n], int x, int y) {
 }
 
 // zadatak tri sa fajla matrice3
-int povrsinaPravougaonika(int n, int m, int pocI, int pocJ, int krajI, int krajJ, int matrix[m][n]){    
-    int povrsina = 0;
-
-    for(int i = pocI; i <= krajI; i++){
-        for(int j = pocJ; j <= krajJ; j++){
-            povrsina++;
-        }
-    }
-    return povrsina;
+int povrsinaPravougaonika(int pocI, int pocJ, int krajI, int krajJ){    
+    return (pocI-krajI+1)*(pocJ-krajJ+1);
 }
 
 void zad3(int n, int m, int matrix[m][n]) {
@@ -125,8 +118,8 @@ void zad3(int n, int m, int matrix[m][n]) {
                     i++;
                 }
                 krajI = i;
-                if(povrsinaPravougaonika(n,m,pocI,pocJ,krajI,krajJ,matrix) > maxP){
-                    maxP = povrsinaPravougaonika(n,m,pocI,pocJ,krajI,krajJ,matrix);
+                if(povrsinaPravougaonika(pocI,pocJ,krajI,krajJ) > maxP){
+                    maxP = povrsinaPravougaonika(pocI,pocJ,krajI,krajJ);
                 }
                 i = pocI;
                 j = pocJ;
