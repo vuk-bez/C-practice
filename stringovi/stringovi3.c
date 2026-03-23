@@ -1,6 +1,7 @@
 // zadaci iz fajla stringovi3.pdf
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 // ZAD 1.
@@ -103,6 +104,55 @@ void zad2() {
     }
 }
 
+// ZAD 3.
+// IP adresa računara u mreži je njegova jedinstvena oznaka po kojoj ga ostali povezani računari prepoznaju.
+// Ona se sastoji od četiri cijela broja od 0 do 255 (bez vodećih nula), odvojena tačkama. Neki primjeri validnih
+// IP adresa su: “192.168.1.0”, “172.16.0.0”, “0.1.2.201”. Za dvije IP adrese kažemo da pripadaju istoj
+// podmreži ako im se poklapa prvih jedan, dva, ili tri broja. Kao adresa podmreže uzimaju se brojevi koji se
+// poklapaju, a zatim se dopisuju nule dok se ne dobiju četiri broja. Napisati C program koji učitava dva stringa
+// koji predstavljaju IP adrese, po jedan u redu, a zatim provjerava da li te dvije adrese pripadaju istoj podreži.
+// Ukoliko pripadaju, štampati adresu te podmreže, a ako ne pripadaju štampati string "NE". Pretpostaviti da će
+// unijete IP adrese uvijek biti validne i različite.
+
+void zad3() {
+    char ip1[17];
+    char ip2[17];
+    char ipR[17];
+
+    scanf("%s\n", ip1);
+    scanf("%s", ip2);
+
+    int i = 0;
+    int zadnjaTacka = 0;
+    int brojTacaka = 0;
+    while (ip1[i] == ip2[i]) {
+        i++;
+        if (ip1[i] == '.') {
+            zadnjaTacka = i;
+            brojTacaka++;
+        }
+    }
+
+    if (zadnjaTacka == 0) {
+        printf("NE");
+        return;
+    }
+
+    for (int k = 0; k <= zadnjaTacka; k++ ) {
+        ipR[k] = ip1[k];
+    }
+    zadnjaTacka++;
+    for (int k = 0; k < 4-(brojTacaka+1); k++) {
+        ipR[zadnjaTacka] = '0';
+        zadnjaTacka++;
+        ipR[zadnjaTacka] = '.';
+        zadnjaTacka++;
+    }
+    ipR[zadnjaTacka] = '0';
+
+    printf("%s\n", ipR);
+}
+
 //ZAD 4.
 // Neka je data rečenica koja se sastoji isključivo od malih slova i praznina (razmaka). Napisati C program
 // koji učitava takav string, a zatim u svakoj riječi iz unijete rečenice okreće redosljed samoglasnika. Riječi u
@@ -111,6 +161,7 @@ void zad2() {
 int jeSamoglasnik(char c) {
     return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
 }
+
 void zad4() {
     char recenica[100];
     char izlaz[100] = ""; //inicijalizujemo prazan string
@@ -140,6 +191,92 @@ void zad4() {
     }
 
     printf("%s\n", izlaz);
+
+}
+
+// ZAD 5.
+// Napisati C program koji učitava string s, a zatim pronalazi i štampa njegov najduži podstring u kojem su
+// svi karakteri različiti. Ukoliko postoji više validnih rješenja, štampati svako od njih.
+
+void zad5() {
+    char string[100];
+    scanf("%s", string);
+    int slova[26] = {0};
+    int nadjen = 1; //indikator da li ispunjava uslov substring
+    int nivoKraj = 0; //indikator koji govori koja je krajnja najveca duzina
+
+    int n = strlen(string);
+    for (int k = n; k >= 0; k--) {
+        if (nivoKraj == 1) return;
+        for (int i = 0; i < n-k+1; i++) {
+            nadjen = 1;
+            char substr[100];
+            strncpy(substr, string+i, k);
+            substr[k] = '\0';
+            for (int j = 0; j < k; j++) {
+                slova[substr[j]-97] ++;
+            }
+            for (int j = 0; j < 26; j++) {
+                if (slova[j] > 1) {
+                    for (int l = 0; l < 26; l++) slova[l] = 0;
+                    nadjen = 0;
+                    break;
+                }
+            }
+            if (nadjen == 1) {
+                printf("%s\n", substr);
+                nivoKraj = 1;
+            }
+        }
+    }
+}
+
+// ZAD 6.
+// Napisati C program koji učitava stringove s1 i s2, sastavljene isključivo od malih slova engleskog alfabeta,
+// a zatim provjerava da li su oni izomorfni i štampa odgovor DA ili NE. Stringovi su izomorfni ako je moguće
+// napraviti funkciju koja svako slovo engleskog alfabeta preslikava u neko drugo slovo, i to tako da se
+// primjenom te funkcije na karaktere iz stringa s1 dobija string s2.
+
+void zad6() {
+    char string1[100];
+    char string2[100];
+    char s1Obezlicen[100];
+    char s2Obezlicen[100];
+    char pocetak = 97;
+    char fix1;
+    char fix2;
+
+    scanf("%s", string1);
+    scanf("%s", string2);
+
+    for (int i = 0; i < strlen(string1); i++) {
+        if (string1[i] == 1) continue;
+        fix1 = string1[i];
+        for (int j = i; j < strlen(string1); j++) {
+            if (string1[j] == fix1) {
+                s1Obezlicen[j] = pocetak;
+                string1[j] = 1;
+            }
+        }
+        pocetak++;
+    }
+    s1Obezlicen[strlen(string1)] = '\0';
+    pocetak = 97;
+    for (int i = 0; i < strlen(string2); i++) {
+        if (string2[i] == 1) continue;
+        fix2 = string2[i];
+        for (int j = i; j < strlen(string2); j++) {
+            if (string2[j] == fix2) {
+                s2Obezlicen[j] = pocetak;
+                string2[j] = 1;
+            }
+        }
+        pocetak++;
+    }
+    s2Obezlicen[strlen(string2)] = '\0';
+
+    if (strcmp(s1Obezlicen, s2Obezlicen) == 0) printf("DA");
+    else printf("NE");
 
 }
 
@@ -188,6 +325,9 @@ int main() {
     if (zad7(string)) printf("True");
     else printf("False"); ------- za zad7 */
 
+    //zad3();
+    //zad5();
+    zad6();
 
     return 0;
 }
