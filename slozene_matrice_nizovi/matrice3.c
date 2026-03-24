@@ -17,7 +17,13 @@ void stampaMatrix(int m, int n, int matrix[m][n]) {
     }
 }
 
-// zadatak jedan sa fajla matrice3
+// ZAD 1.
+// Maksimalno uzorkovanje iz matrice brojeva definiše se na sljedeći način. Za neki broj k, matrica
+// se dijeli u disjunktne podmatrice formata k×k. Iz svake podmatrice se uzima element sa
+// maksimalnom vrijednošću i takvi maksimumi formiraju novu matricu, k puta manjih dimenzija od
+// ulazne. Napisati program koji za date brojeve m, n i k, i ulaznu matricu formata m×n, pronalazi i
+// štampa matricu koja predstavlja rezultat maksimalnog uzorkovanja. Pretpostaviti da će brojevi m i n
+// uvijek biti djeljivi brojem k.
 int najveciBroj(int m, int n, int k, int pocI, int pocJ, int matrix[m][n]) {
     
     int maxBr = 0;
@@ -45,7 +51,17 @@ void zad1(int m, int n, int k, int matrix[m][n], int rez[m/k][n/k]) {
     }
 }
 
-// zadatak dva sa fajla matrice3
+// ZAD 2.
+// U igri sudoku polazi se od matrice formata n2×n2 , za neki prirodan broj n. Neka polja u
+// matrici sadrže brojeve iz skupa {1,2 , ..., n2 } i ona su popunjena, dok za polja koja sadrže nulu
+// kažemo da su prazna. Cilj igre je popuniti sva prazna polja brojevima iz skupa {1,2 , ..., n2 } , i to
+// tako da budu zadovoljena sljedeća ograničenja. Ni u jednoj vrsti se ne smije ponoviti isti broj više
+// od jednog puta, a isto važi i za kolone. Takođe, matrica je podijeljena na n2 ćelija formata n×n, i u
+// ćelijama takođe nijesu dozvoljena ponavljanja istog broja. Napisati program koji učitava broj n,
+// zatim matricu formata n2×n2 i na kraju brojeve x i y - vrstu i kolonu jednog od praznih polja u
+// matrici. Izlaz programa treba da bude niz brojeva koje je moguće upisati na poziciju (x, y) a da pri
+// tome ne bude narušeno nijedno od navedenih ograničenja.
+
 void zad2(int n, int matrix[n*n][n*n], int x, int y) {
     int broj = 1;
     for(int broj = 1; broj <= n*n; broj++){
@@ -74,7 +90,13 @@ void zad2(int n, int matrix[n*n][n*n], int x, int y) {
     
 }
 
-// zadatak tri sa fajla matrice3
+// ZAD 3.
+// Napisati program koji učitava binarnu matricu (koja se sastoji isključivo od nula i jedinica)
+// formata m×n, a zatim pronalazi i štampa površinu najvećeg pravougaonika u njoj. Ivicu
+// pravougaonika čine jedinice, a u njegovoj unutrašnjosti se može nalaziti bilo šta. Površina
+// pravougaonika se računa kao broj elemenata matrice koje on obuhvata, uključujući i njegovu ivicu.
+// Među pravougaonicima mogu postojati preklapanja.
+
 int povrsinaPravougaonika(int pocI, int pocJ, int krajI, int krajJ){    
     return (pocI-krajI+1)*(pocJ-krajJ+1);
 }
@@ -129,9 +151,6 @@ void zad3(int n, int m, int matrix[m][n]) {
 
     printf("%d", maxP);
 }
-
-
-
 
 int main() {
     
