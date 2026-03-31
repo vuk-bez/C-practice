@@ -42,12 +42,48 @@ void zad1(char* adresa) {
     
 }
 
+// ZAD 2.
+// Dozvoljena je sljedeća operacija: u rijeci uzmemo prvi suglasnik i zamijenimo mjesta sa posljednjim suglasnikom;
+// drugi suglasnik zamijeni mjesta sa pretposljednjim suglasnikom itd. 
+// Ako poslije te operacije opet dobijemo polaznu riječ, tada takvu nazivamo bezglasni palindrom 
+// (npr. takve su riječi: sos, rare, rotor, gong, karaoke). 
+// Napisati program koji provjerava da li je data riječ bezglasni palindrom.
+
+// pomocna funkcija koja provjerava da li je samoglasnik
+int JeSamoglasnik(char s) {
+    return s == 'a' || s == 'e' || s == 'i' || s == 'o' || s == 'u';
+}
+
+void zad2(char* string) {
+    
+    char polazniCpy[100];
+    strcpy(polazniCpy, string);
+
+    int l = strlen(string) - 1;
+    int r = 0;
+
+    while(r < l) {
+        if(!JeSamoglasnik(string[r]) && !JeSamoglasnik(string[l])) {
+            char temp = string[r];
+            string[r] = string[l];
+            string[l] = temp;
+            r++; l--;
+        } else {
+            if(JeSamoglasnik(string[r])) r++;
+            if (JeSamoglasnik(string[l])) l--;
+        }
+    }
+
+    if(strcmp(polazniCpy, string) == 0) printf("Jeste bezglasni palindrom");
+    else printf("Nije bezglasni palindrom");
+}
 
 int main() {
     
     char* adresa = (char*)malloc(100*sizeof(char));
     scanf("%s", adresa);
-    zad1(adresa);
+    //zad1(adresa);
+    zad2(adresa);
 
     return 0;
 }
