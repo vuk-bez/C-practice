@@ -78,12 +78,50 @@ void zad2(char* string) {
     else printf("Nije bezglasni palindrom");
 }
 
+//izomorfni
+void izomorfni_stringovi() {
+    char s1[100], s2[100];
+    scanf("%s %s", s1, s2);
+
+    char mapiranje[26] = {0};
+
+    if (strlen(s1) != strlen(s2)) {
+        printf("NE\n");
+        return;
+    }
+
+    int i;
+    for (i = 0; s1[i] != '\0'; i++) {
+        char idx = s1[i] - 'a';
+        char c = s2[i];
+        if (mapiranje[idx] == 0)
+            mapiranje[idx] = c;
+        else if (mapiranje[idx] != c) {
+            printf("NE\n");
+            return;
+        }
+    }
+
+    int j;
+    for (i = 0; i < 25; i++) {
+        for (j = i+1; j < 26; j++) {
+            if (mapiranje[i] == mapiranje[j] && mapiranje[i] != 0) {
+                printf("NE\n");
+                return;
+            }
+        }
+    }
+
+    printf("DA\n");
+}
+
 int main() {
     
-    char* adresa = (char*)malloc(100*sizeof(char));
-    scanf("%s", adresa);
+    //char* adresa = (char*)malloc(100*sizeof(char));
+    //scanf("%s", adresa);
     //zad1(adresa);
-    zad2(adresa);
+    //zad2(adresa);
+    izomorfni_stringovi();
 
     return 0;
 }
