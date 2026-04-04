@@ -78,7 +78,8 @@ void zad2(char* string) {
     else printf("Nije bezglasni palindrom");
 }
 
-//izomorfni
+// ZAD 3.
+// Provjeriti da li su stringovi izomorfni. Unose se dva stringa.
 void izomorfni_stringovi() {
     char s1[100], s2[100];
     scanf("%s %s", s1, s2);
