@@ -1,0 +1,2 @@
+rad sa tekstualnim fajlovima
+filtriranje rijeci iz fajla

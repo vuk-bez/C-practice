@@ -28,7 +28,7 @@ int main() {
     fulaz = fopen ("zad1_ulaz.txt", "r"); //cita podatke iz fajla
 
     FILE *fizlaz;
-    fizlaz = fopen ("izlaz.txt", "w");
+    fizlaz = fopen ("zad1_izlaz.txt", "w");
 
     char w[100] = "";
     fgets (w, 100, stdin);
