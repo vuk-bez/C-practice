@@ -103,6 +103,36 @@ int atoiR(char* s, int n) {
         return atoiR(s, n-1)*10 + (s[n-1] - '0');
     }
 }
+
+// ZAD. 6. Napisati funkciju koja izračunava koliko postoji binarnih nizova dužine n u kojima nema pojave
+//uzastopnih jedinica. Npr. za n = 4 izlaz je 8 (to su nizovi 0000, 0001, 0010, 0100, 0101, 1000, 1001, 1010).
+
+int zad6(int n) {
+    if (n == 1)
+        return 2;
+
+    if (n == 2)
+        return 3;
+
+    return zad6(n - 1) + zad6(n - 2);
+}
+
+
+// ZAD 7. Stazu širine 1m i dužine n metara treba popločati, pri čemu na raspolaganju imamo ploče dimenzija
+// 1m×1m i 2m×1m. Napisati funkciju koja izračunava broj mogućih popločavanja, pod pretpostavkom da su
+// ploče obje vrste dostupne u neograničenim količinama. Npr. za n = 4 broj različitih popločavanja je 5.
+
+int poplocavanje(int n) {
+
+    if (n == 1) {
+        return 1;
+    } else if (n == 2) {
+        return 2;
+    }
+    else {
+        return poplocavanje(n-1) + poplocavanje(n-2);
+    }
+}
 int main() {
     char src[100] = "ANA";
     char dest[100] = "principi";
@@ -112,6 +142,9 @@ int main() {
     //printf("%d", palindrom(src, 3));
     //preuredi(niz, 7);
     //printf("%d", stepenovanje(2, 7));
-    printf("%d", atoiR("256", 3));
+    //printf("%d", atoiR("256", 3));
+
+ //   printf("%d", poplocavanje(7));
+    printf("%d", zad6(4));
     return 0;
 }
