@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-
-//Zadaci iz fajla rekurzija2.pdf
+// ZADACI IZ FAJLA REKURZIJA2.PDF
 
 // ZAD 1.Napisati rekurzivne varijante funkcija strcpy, strncpy, strcmp.
 
