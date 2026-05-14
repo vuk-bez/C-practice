@@ -4,12 +4,12 @@
 
 // ZAD 1. -- Napisati rekurzivnu funkciju int insert0(int n) koja vraća prirodni broj
 // koji se dobija od broja n tako što mu se između svakog para jednakih uzastopnih cifara
-// umetne nula. Ukoliko u broju n nema uzastopnih ponavljanja istih cifara, broj ostaje nepromijenjen.
+// umetne nula. Ukoliko u broju n nema uzastopnih ponavljanja istih cifara, broj ostaje nepromijenjen. 45056
 
-int zad1(int n) {
+int zad1(int n) { // 4556
     if (n == 0) return 0;
-    int cif = n % 10;
-    int ostatak = zad1(n/10);
+    int cif = n % 10; // 5
+    int ostatak = zad1(n/10); //4500+5 - 4505..
     if (cif == ostatak % 10) return ostatak*100 + cif;
     else return ostatak*10 + cif;
 }

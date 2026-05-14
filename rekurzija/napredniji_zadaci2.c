@@ -5,8 +5,9 @@
 // ZAD 1.Napisati rekurzivne varijante funkcija strcpy, strncpy, strcmp.
 
 void strcpyR(char* dest, char* src) {
-    // src = "principi\0" ---> dest ""
-
+    // src = "principi\0" ---> dest "pr..."
+    // string[100] = a[0] n[1] ...
+    //
     if (*src == '\0') {
         *dest = '\0';
         return;
@@ -45,7 +46,7 @@ int strcmpR(char* first, char* second) {
 
 // ZAD. 2. Napisati rekurzivnu funkciju koja provjerava da li je dati string palindrom
 
-int palindrom(char* str, int n) {
+int palindrom(char* str, int n) { // anavolimilovana
 
     if (n <= 1) {
         return 1;
@@ -58,9 +59,9 @@ int palindrom(char* str, int n) {
 
 //ZAD 3. -- Napisati rekurzivnu funkciju void preuredi(int* a, int n) koja niz a dužine n preuređuje tako da parni
 // elementi budu ispred neparnih. Npr. od niza 1, 2, 3, 4, 5, 6, 7 treba dobiti niz 2, 4, 6, 1, 3, 5, 7.
-// --- NE RADIIII -----
+
 void preuredi(int* a, int n) {
-    if (n == 1) {
+    if (n <= 1) {
         return;
     }
 
@@ -135,15 +136,20 @@ int poplocavanje(int n) {
 int main() {
     char src[100] = "ANA";
     char dest[100] = "principi";
+    int niz[7] = {1, 2, 3, 4, 5, 6, 7};
     //strcpyR(dest, src); --- test za zad 1.
     //strncpyR(dest, src, 3);
     //printf("%s", dest);
     //printf("%d", palindrom(src, 3));
-    //preuredi(niz, 7);
+    preuredi(niz, 7);
+    for (int i = 0; i < 7; i++) {
+        printf("%d ", niz[i]);
+    }
     //printf("%d", stepenovanje(2, 7));
     //printf("%d", atoiR("256", 3));
 
  //   printf("%d", poplocavanje(7));
     printf("%d", zad6(4));
+
     return 0;
 }

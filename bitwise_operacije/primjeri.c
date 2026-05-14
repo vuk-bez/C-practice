@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+//4 bajta - 32 bita (int) 000000 ..... 00000001
+
 // ZAD. 1. -- Napisati funkciju koja vraća najmanje značajan bit (LSB) cijelog broja.
 // Drugim riječima, odrediti da li je posljednji bit broja 0 ili 1.
 
@@ -14,7 +16,7 @@ int zad1(int n) {
 int zad2(int i, int k) {
     int mask = 1; // 0...0 0...0 0...0 0...1
     mask = mask << k; // 0...0 0...1(k-ta pozicija) 0...0 0...0
-    return (i & mask);
+    return (i & mask) >> k; // 0...0 0...1 0...0 0...0
 }
 
 // ZAD 3. -- Napisati funkciju koja postavlja (setuje) k-ti bit broja na 1, bez obzira na njegovu prethodnu vrijednost.
@@ -29,8 +31,8 @@ int zad3(int i, int k) {
 
 int zad4(int i, int k) {
     int mask = 1;
-    mask = mask << k; //0...0
-    return (mask ^ i);
+    mask = mask << k; //0...0 0...0 1...0 0...0   0^0 --> 0 0^1 ---> 1 1^0 --> 1 1^1 ---> 0
+    return (mask ^ i);//x...x x...x  ...x x...x
 }
 
 // ZAD. 5. -- Napisati funkciju koja pronalazi indeks najvišeg bita koji ima vrijednost 1 u binarnom zapisu broja. Ako broj nema jedinica, vratiti -1.
@@ -38,12 +40,11 @@ int zad4(int i, int k) {
 int  zad5(int n) {
 
     int Ind = -1;
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 32; i++) { // x...x x...x x...x x...x
         int mask = 1;
         mask = mask << i;
-        if (n & mask) {
+        if (n & mask)
             Ind = i;
-        }
     }
     return Ind;
 }
@@ -51,7 +52,7 @@ int  zad5(int n) {
 // ZAD 6. -- Napisati funkciju koja pronalazi indeks najnižeg bita koji ima vrijednost 1 u binarnom zapisu broja.
 
 int zad6(int n) {
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 32; i++) { // x...x x...x x...x ....1000
         int mask = 1;
         mask = mask << i;
         if (n & mask) {
@@ -104,7 +105,7 @@ int zad9(int n) {
 int zad10(int n) {
     if (zad2(n, 0)) {
         n = n >> 1;
-        n = n | 128; // 1...0 0...0 0...0 0...0
+        n = n | 128; // 0...0 0...0 0...0 1...0
         return n;
     } else return n >> 1;
 }
@@ -158,16 +159,19 @@ int zad15(int n) {
 }
 int main() {
 
-    printf("%d\n", zad5(-8));
-    printf("%d\n", zad6(8));
-    printf("%d\n", zad7(-7));
-    printf("%d\n", zad8(-7));
-    printf("%d\n", zad9(-7));
+   // printf("%d\n", zad2(5, 2));
+   // printf("%d\n", zad5(-8));
+   // printf("%d\n", zad6(8));
+  //  printf("%d\n", zad7(-7));
+   // printf("%d\n", zad8(-7));
+    printf("%d\n", zad9(-13));
     printf("%d\n", zad10(-7));
     printf("%d\n", zad11(-7, 3));
     zad12(8);
     zad13(-7);
     printf("%d\n", zad14(-7));
-    printf("%d\n", zad15(8));
+    printf("%d\n", zad15(-7));
     return 0;
+
 }
+
