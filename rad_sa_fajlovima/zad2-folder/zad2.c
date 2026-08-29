@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 
 /* U tekstualnom fajlu ulaz.txt svaka linija se sastoji od brojeva razdvojenih zarezima. Napisati C program
